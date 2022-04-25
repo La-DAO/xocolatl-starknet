@@ -15,4 +15,3 @@ namespace IHouseOfReserve:
     func reserve_token_id() -> (id: felt):
     end
 end
-
