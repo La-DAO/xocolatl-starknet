@@ -150,3 +150,24 @@ func _balances{
 
     return (reserve_bal, minted_coin_bal)
 end
+
+func _check_remaining_minting_power{
+        syscall_ptr : felt*,
+        pedersen_ptr : HashBuiltin*,
+        range_check_ptr
+    }(
+        user: felt,
+        reserve_token_id: felt,
+        backed_token_id: felt
+        collat_ratio: (felt, felt),
+        price: felt
+     ):
+
+     let (reserve_bal, minted_coin_bal) = _balances(user, reserve_token_id, backed_token_id)
+
+     let reserve_bal_reduced_by_factor = (reserve_bal * collat_ratio[1]) / collat_ratio[0]
+
+     let max_mintable_amount - reserve_bal_reduced_by_factor * price / 1e18
+
+     return ()
+end
