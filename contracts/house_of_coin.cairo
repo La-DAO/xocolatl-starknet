@@ -5,6 +5,8 @@ from starkware.cairo.common.uint256 import Uint256
 
 from starkware.starknet.common.syscalls import get_caller_address
 
+from contracts.interfaces.house_of_reserve import IHouseOfReserve
+
 @storage_var
 func backed_asset_storage() -> (name: felt):
 end
@@ -87,6 +89,32 @@ func set_backed_token_id{
         tempvar pedersen_ptr = pedersen_ptr
         tempvar range_check_ptr = range_check_ptr
     end
+
+    return ()
+end
+
+@external
+func mint_coin{
+        syscall_ptr : felt*, 
+        pedersen_ptr : HashBuiltin*,
+        range_check_ptr
+    }(
+        reserve_asset: felt,
+        house_of_reserve: felt,
+        amount: Uint256
+     ):
+    alloc_locals
+    let (caller) = get_caller_address()
+
+    # verify backed_asset is a valid asset
+
+    let (reserve_token_id) = IHouseOfReserve.reserve_token_id(contract_address=house_of_reserve)
+    let (backed_asset) = backed_asset_storage.read()
+    let (backed_token_id) = backed_token_id_storage.read(reserve_asset, backed_asset)
+
+    let (numertor, denominator) = IHouseOfReserve.collateral_ratio(contract_address=house_of_reserve)
+
+    # fetch price
 
     return ()
 end
