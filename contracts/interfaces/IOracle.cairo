@@ -13,42 +13,67 @@ namespace IOracle:
     # Getters
     #
 
-    func get_publisher_public_key(publisher : felt) -> (publisher_public_key : felt):
+    func get_admin_address() -> (admin_address : felt):
     end
 
-    func get_entries_for_key(key : felt) -> (entries_len : felt, entries : Entry*):
+    func get_publisher_registry_address() -> (publisher_registry_address : felt):
     end
 
-    func get_value(key : felt) -> (value : felt, last_updated_timestamp : felt):
+    func get_active_oracle_implementation_addresses() -> (
+            oracle_addresses_len : felt, oracle_addresses : felt*):
     end
 
-    func get_decimals() -> (decimals : felt):
+    func get_oracle_implementation_address(idx : felt) -> (oracle_implementation_address : felt):
+    end
+
+    func get_primary_oracle_implementation_address() -> (
+            primary_oracle_implementation_address : felt):
     end
 
     #
     # Setters
     #
 
-    func rotate_publisher_registration_key(
-            old_key : felt, new_key : felt, signature_r : felt, signature_s : felt):
+    func set_admin_address(new_address : felt):
     end
 
-    func rotate_publisher_key(
-            publisher : felt, old_key : felt, new_key : felt, signature_r : felt,
-            signature_s : felt):
+    func update_publisher_registry_address(publisher_registry_address : felt):
     end
 
-    func register_publisher(
-            publisher_public_key : felt, publisher : felt, publisher_signature_r : felt,
-            publisher_signature_s : felt, registration_signature_r : felt,
-            registration_signature_s : felt):
+    func add_oracle_implementation_address(oracle_implementation_address : felt):
     end
 
-    func submit_entry(new_entry : Entry, signature_r : felt, signature_s : felt):
+    func update_oracle_implementation_active_status(
+            oracle_implementation_address : felt, is_active : felt):
     end
 
-    func submit_many_entries(
-            new_entries_len, new_entries, signatures_r_len, signatures_r, signatures_s_len,
-            signatures_s):
+    func set_primary_oracle_implementation_address(primary_oracle_implementation_address : felt):
+    end
+
+    #
+    # Oracle Implementation Controller Functions
+    #
+
+    func get_decimals(key : felt) -> (decimals : felt):
+    end
+
+    func get_entries(key : felt) -> (entries_len : felt, entries : Entry*):
+    end
+
+    func get_value(key : felt, aggregation_mode : felt) -> (
+            value : felt, last_updated_timestamp : felt):
+    end
+
+    #
+    # Setters
+    #
+
+    func set_decimals(key : felt, decimals : felt):
+    end
+
+    func submit_entry(new_entry : Entry):
+    end
+
+    func submit_many_entries(new_entries_len : felt, new_entries : Entry*):
     end
 end

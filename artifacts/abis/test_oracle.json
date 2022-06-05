@@ -1,0 +1,31 @@
+[
+    {
+        "inputs": [
+            {
+                "name": "threshold",
+                "type": "felt"
+            }
+        ],
+        "name": "check_eth_mxn_threshold",
+        "outputs": [
+            {
+                "name": "is_above_threshold",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "check_eth_mxn_price",
+        "outputs": [
+            {
+                "name": "price",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
